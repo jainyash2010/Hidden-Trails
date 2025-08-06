@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hidden Trails – Explore India</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #ff6b6b, #f9ca24);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      font-weight: 300;
+    }
+
+    nav {
+      background-color: #2d3436;
+      text-align: center;
+      padding: 0.8rem 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #f9ca24;
+    }
+
+    .section {
+      padding: 4rem 2rem;
+    }
+
+    .card-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      width: 320px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.4s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card h2 {
+      margin: 1rem 0 0.5rem;
+      color: #d63031;
+    }
+
+    .card p {
+      padding: 0 1rem 1rem;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      margin: 1rem 0 2rem;
+      padding: 0.6rem 1.4rem;
+      background: linear-gradient(to right, #6c5ce7, #00cec9);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 25px;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(to right, #00cec9, #6c5ce7);
+    }
+
+    h2 {
+      text-align: center;
+      color: #2d3436;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 3rem;
+      max-width: 700px;
+      margin: 1rem auto;
+      color: #444;
+    }
+
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    footer {
+      background-color: #2d3436;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Hidden Trails</h1>
+    <p>Discover India’s unseen beauty, heritage, and spirit</p>
+  </header>
+
+  <nav>
+    <a href="#main">Home</a>
+    <a href="#haryana">Haryana</a>
+    <a href="#rajasthan">Rajasthan</a>
+  </nav>
+
+  <!-- Main Section -->
+  <section id="main" class="section">
+    <h2>Choose a State to Explore</h2>
+    <div class="card-container">
+      <div class="card">
+        <img src="https://thepatriot.in/wp-content/uploads/2022/10/Nahar-Singh-Mahal.jpg" alt="Haryana Tourism">
+        <h2>Haryana Tourism</h2>
+        <p>Spiritual destinations, heritage cities, and vibrant culture.</p>
+        <a href="haryana.final.html" class="btn">Explore Haryana</a>
+      </div>
+
+      <div class="card">
+        <img src="https://s7ap1.scene7.com/is/image/incredibleindia/hawa-mahal-jaipur-rajasthan-city-1-hero?qlt=82&ts=1742200253577" alt="Rajasthan Tourism">
+        <h2>Rajasthan Tourism</h2>
+        <p>Desert adventures, palaces, and colorful festivals.</p>
+        <a href="rajasthan_tourism_full.html" class="btn">Explore Rajasthan</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Haryana Section -->
+  <section id="haryana" class="section">
+    <h2>Haryana – The Land of Legends</h2>
+    <p style="text-align: center;">Known for its rich historical and spiritual significance.</p>
+    <ul>
+      <li><strong>Kurukshetra:</strong> Site of the Mahabharata war</li>
+      <li><strong>Surajkund:</strong> International Crafts Mela</li>
+      <li><strong>Morni Hills:</strong> Peaceful hill station</li>
+      <li><strong>Sultanpur:</strong> Bird sanctuary</li>
+      <li><strong>Panipat:</strong> Historic battlefield site</li>
+    </ul>
+    <div style="text-align: center;">
+      <a href="#main" class="btn">Back to Home</a>
+    </div>
+  </section>
+
+  <!-- Rajasthan Section -->
+  <section id="rajasthan" class="section">
+    <h2>Rajasthan – Land of Kings</h2>
+    <p style="text-align: center;">Home to deserts, majestic forts, and vibrant traditions.</p>
+    <ul>
+      <li><strong>Jaipur:</strong> Hawa Mahal and Amer Fort</li>
+      <li><strong>Jaisalmer:</strong> Golden Desert Fort</li>
+      <li><strong>Udaipur:</strong> Lakes and palaces</li>
+      <li><strong>Mount Abu:</strong> Hill station with Dilwara Temples</li>
+      <li><strong>Pushkar:</strong> Camel fair and holy lake</li>
+    </ul>
+    <div style="text-align: center;">
+      <a href="#main" class="btn">Back to Home</a>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Hidden Trails. Designed for the Tourism Hackathon.
+  </footer>
+
+</body>
+</html>

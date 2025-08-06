@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epic Center - Explore Rajasthan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #2e59d9;
+            --accent-color: #f6c23e;
+            --dark-color: #2c3e50;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: #333;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: relative;
+            overflow: hidden;
+            padding: 100px 0;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.95) !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.2rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(78, 115, 223, 0.1);
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link.active {
+            background-color: var(--primary-color);
+            color: white !important;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 0.5rem 1.5rem;
+            font-weight: 500;
+            border-radius: 0.5rem;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            border-radius: 0.5rem;
+        }
+        
+        .btn-accent:hover {
+            background-color: #e0b12d;
+            border-color: #e0b12d;
+            color: var(--dark-color);
+        }
+        
+        #map {
+            height: 400px;
+            width: 100%;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .day-plan {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .day-plan h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark-color), #1a252f);
+            color: white;
+            position: relative;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            margin: 0 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .floating-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .hero-text {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .city-card {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .city-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .city-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 0;
+            }
+            
+            .card-img-top {
+                height: 150px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Action Button -->
+    <div class="floating-btn" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <header class="text-white">
+        <div class="container position-relative z-1 text-center">
+            <h1 class="hero-text display-3 fw-bold mb-3">Explore <span class="text-warning">Rajasthan</span></h1>
+            <p class="hero-text lead mb-4">Discover the rich heritage, delicious cuisine, and vibrant culture of Rajasthan</p>
+            <button class="btn btn-accent btn-lg me-2" onclick="requestLocation()">
+                <i class="fas fa-map-marker-alt me-2"></i>Show My Location
+            </button>
+            <a href="#planner" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-calendar-alt me-2"></i>Plan Your Trip
+            </a>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-map-marked-alt me-2"></i>Epic Center
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cities">Cities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#places">Places</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#food">Food</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hospitals">Hospitals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#planner">Planner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#map-section">Map</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <section id="home" class="mb-5 slide-up">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <img src="https://tse2.mm.bing.net/th/id/OIP.WirMTS1mKtkuQHdIAcO8eQHaFj?pid=Api&P=0&h=180" alt="Rajasthan" class="img-fluid rounded-3 shadow">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">Welcome to Rajasthan</h2>
+                    <p class="lead">Rajasthan, the land of rich cultural heritage and rapid development, offers a unique blend of traditional and modern experiences.</p>
+                    <p>From ancient temples to modern cities, from delicious local cuisine to international culinary experiences, Rajasthan provides diverse attractions for every type of traveler.</p>
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-city feature-icon me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">41 Districts</h5>
+                                    <small class="text-muted">To explore</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-utensils feature-icon me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">50+ Dishes</h5>
+                                    <small class="text-muted">To taste</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-landmark feature-icon me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">100+ Heritage Sites</h5>
+                                    <small class="text-muted">To visit</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-bus feature-icon me-3"></i>
+                                <div>
+                                    <h5 class="mb-0">Excellent Transport</h5>
+                                    <small class="text-muted">To travel</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="cities" class="mb-5 fade-in">
+            <h2 class="section-title text-center">Cities of Rajasthan</h2>
+            <p class="text-center mb-5">Explore the diverse cities of Rajasthan, each with its unique charm</p>
+            
+            <div class="row">
+                <!-- Udaipur -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Udaipur')">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.6D1dvp5dEy6zQWECE41yQAHaE8?pid=Api&P=0&h=180" class="card-img-top" alt="Udaipur">
+                        <div class="city-badge">Hill station</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Mount abu</h5>
+                            <p class="card-text">Known as the heart of Aravalli with rich historical significance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chandigarh -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Chandigarh')">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.6GOWq62jsPFPw0A4b4xWoQHaFj?pid=Api&P=0&h=180" class="card-img-top" alt="Chandigarh">
+                        <div class="city-badge">Pink city</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jaipur</h5>
+                            <p class="card-text">The beautiful capital city known for its architecture and planning.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jodhpur -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Jodhpur')">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.tnsl-yfd7iIsM4okRib0jAHaE8?pid=Api&P=0&h=180" class="card-img-top" alt="Jodhpur">
+                        <div class="city-badge">Blue city</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jodhpur</h5>
+                            <p class="card-text">The financial and industrial hub of Rajasthan.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Ajmer -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Ajmer')">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.LAGF6T6WhttpYsZcKSTHYQHaE8?pid=Api&P=0&h=180" class="card-img-top" alt="Ajmer">
+                        <div class="city-badge">Red city</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Bikaner</h5>
+                            <p class="card-text">Famous for its bhujia and other food items.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jaipur -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Jaipur')">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.eKK1csUqKixc5-gcziAZQwHaE8?pid=Api&P=0&h=180" class="card-img-top" alt="Jaipur">
+                        <div class="city-badge">Fair city</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Pushkar</h5>
+                            <p class="card-text">Known for its religious and cultural importance.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sikar -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Sikar')">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.bSzcx11gKcCQVkrk3XA_wAHaCp?pid=Api&P=0&h=180" class="card-img-top" alt="Sikar">
+                        <div class="city-badge">Sun city</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Jaisalmer</h5>
+                            <p class="card-text">Desert safari and rich architecture.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chittorgarh -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Chittorgarh')">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.MvmHIsed6KRxZBDnLABHnQHaE8?pid=Api&P=0&h=180" class="card-img-top" alt="Chittorgarh">
+                        <div class="city-badge">Historical</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Chittorgarh</h5>
+                            <p class="card-text">City of weavers and site of three historic battles.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Alwar -->
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                    <div class="card h-100 city-card" onclick="showCityInfo('Alwar')">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.CQ_YYIujDfKcaalFvo_eNwHaEK?pid=Api&P=0&h=180" class="card-img-top" alt="Alwar">
+                        <div class="city-badge">Lake city</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Udaipur</h5>
+                            <p class="card-text">Known as the city of lakes and royality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" onclick="showAllCities()">
+                    <i class="fas fa-city me-2"></i>View All 41 Districts
+                </button>
+            </div>
+        </section>
+
+        <section id="places" class="mb-5 fade-in">
+            <h2 class="section-title text-center">Famous Places</h2>
+            <p class="text-center mb-5">Discover the most iconic landmarks and attractions across Rajasthan</p>
+            
+            <ul class="nav nav-pills justify-content-center mb-4" id="placesTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="historical-tab" data-bs-toggle="pill" data-bs-target="#historical-places" type="button">Historical</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="religious-tab" data-bs-toggle="pill" data-bs-target="#religious-places" type="button">Religious</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="nature-tab" data-bs-toggle="pill" data-bs-target="#nature-places" type="button">Nature</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="modern-tab" data-bs-toggle="pill" data-bs-target="#modern-places" type="button">Modern</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="placesTabContent">
+                <div class="tab-pane fade show active" id="historical-places" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.lyC-lK1kTa9w2JLXkNFGJAHaE8?pid=Api&P=0&h=180" class="card-img-top" alt="Raja Raghu's Fort">
+                                <div class="card-body">
+                                    <h5 class="card-title">kumbhalgarh fort (Udaipur)</h5>
+                                    <p class="card-text">Historic fort dating back to 700 years.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Raja Raghu Fort, Udaipur')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.tbZUQBBjliyx3acQSXzy4AHaD8?pid=Api&P=0&h=180" class="card-img-top" alt="Jaisalmer Fort">
+                                <div class="card-body">
+                                    <h5 class="card-title">Haldighati</h5>
+                                    <p class="card-text">Showcases artifacts from the three battles of Chittorgarh.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Jaisalmer Fort')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.vqwHUHHzHiS0DbxJz6ScCQHaFj?pid=Api&P=0&h=180" class="card-img-top" alt="Sheikh Chilli's Tomb">
+                                <div class="card-body">
+                                    <h5 class="card-title">Umaid bhawan palace</h5>
+                                    <p class="card-text">World's largest private residence.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Sheikh Chilli Tomb, Thanesar')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="religious-places" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse4.mm.bing.net/th/id/OIP.t57AZvkVQPTLcKE7BVgPiAHaDJ?pid=Api&P=0&h=180" class="card-img-top" alt="Brahma Sarovar">
+                                <div class="card-body">
+                                    <h5 class="card-title">Salasar</h5>
+                                    <p class="card-text">Sacred place of lord hanuman .</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Brahma Sarovar, Kota')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.bdTV7BlXQGLFtUM32CbevAHaE9?pid=Api&P=0&h=180" class="card-img-top" alt="Mansa Devi Temple">
+                                <div class="card-body">
+                                    <h5 class="card-title">karni mata Temple (Bikaner)</h5>
+                                    <p class="card-text">Famous rat temple of goddess karni.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Mansa Devi Temple, Bikaner')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.2wzaqkvfFP-oq_8WRaoVuwHaEK?pid=Api&P=0&h=180" class="card-img-top" alt="Nada Sahib">
+                                <div class="card-body">
+                                    <h5 class="card-title">Khatoo shyam </h5>
+                                    <p class="card-text">Important krishna temple of khatoo shyam.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Nada Sahib Gurudwara, Bikaner')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="nature-places" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.InrUbZvwHyjcffB2HI19awHaEv?pid=Api&P=0&h=180" class="card-img-top" alt="Mount Abu">
+                                <div class="card-body">
+                                    <h5 class="card-title">Mount Abu</h5>
+                                    <p class="card-text">Bird watcher's paradise with over 250 species of birds.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Sultanpur National Bird Sanctuary')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse2.mm.bing.net/th/id/OIP.FpAFfYZV0AKJUbARiWmkwwHaEo?pid=Api&P=0&h=180" class="card-img-top" alt="Fateh Sagar Lake">
+                                <div class="card-body">
+                                    <h5 class="card-title">Fateh Sagar Lake</h5>
+                                    <p class="card-text">Largest natural lake in Rajasthan with adventure activities.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Fateh Sagar Lake, Sohna')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse2.mm.bing.net/th/id/OIP.Uzxz21yko-0ODyPB_ad2XQHaHa?pid=Api&P=0&h=180" class="card-img-top" alt="Keoladeo National Park">
+                                <div class="card-body">
+                                    <h5 class="card-title">Ranthambore National Park</h5>
+                                    <p class="card-text">Dense forest with diverse flora and fauna.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Keoladeo National Park')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane fade" id="modern-places" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse4.mm.bing.net/th/id/OIP.jxz3BTdIGusCbZmeWZnKSAHaDl?pid=Api&P=0&h=180" class="card-img-top" alt="Kingdom of Dreams">
+                                <div class="card-body">
+                                    <h5 class="card-title">World Trade park</h5>
+                                    <p class="card-text">Rajasthan's Largest mall.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('world trade park,jaipur')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.9nAJ1v0pVUfyaIEBW34gEAHaDL?pid=Api&P=0&h=180" class="card-img-top" alt="Ambience Mall">
+                                <div class="card-body">
+                                    <h5 class="card-title">Hotel ITC Rajputana</h5>
+                                    <p class="card-text">One of India's largest and luxurious hotel.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Ambience Mall, Jodhpur')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="card h-100">
+                                <img src="https://tse3.mm.bing.net/th/id/OIP.-UZH5Eq9XOA5waqTEp6kdwHaD4?pid=Api&P=0&h=180" class="card-img-top" alt="Cyber Hub">
+                                <div class="card-body">
+                                    <h5 class="card-title">Rajasthan international centre</h5>
+                                    <p class="card-text"> a modern cultural hub with a unique design inspired by Hindu mythology and Rajasthan's heritage.</p>
+                                    <button class="btn btn-sm btn-primary" onclick="showDirection('Cyber Hub, Jodhpur')">
+                                        <i class="fas fa-directions me-1"></i> Get Directions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="food" class="mb-5 fade-in">
+            <h2 class="section-title text-center">Famous Food</h2>
+            <p class="text-center mb-5">Savor the authentic flavors of Rajasthan's cuisine</p>
+            
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.nS097bPuYMdnuViCPrPydgHaEK?pid=Api&P=0&h=180" class="card-img-top" alt="Dal Baati Churma">
+                        <div class="card-body">
+                            <h5 class="card-title">Dal Baati Churma</h5>
+                            <p class="card-text">Nutritious millet-based dish cooked with lentils and local spices.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse2.mm.bing.net/th/id/OIP.FGgC44jP7P-GNFPIoq5fYwHaEK?pid=Api&P=0&h=180" class="card-img-top" alt="Gatte Ki Sabzi">
+                        <div class="card-body">
+                            <h5 class="card-title">Gatte Ki Sabzi</h5>
+                            <p class="card-text">Yogurt-based curry with besan pakoras, served with rice or bajra roti.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.XX-3-JKtuKzUGApvD3O_xQHaGH?pid=Api&P=0&h=180" class="card-img-top" alt="Ker Sangri">
+                        <div class="card-body">
+                            <h5 class="card-title">Ker Sangri</h5>
+                            <p class="card-text">Unique desert bean preparation cooked with spices, a Udaipur specialty.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.D_JPYVfX_nvRfvD_dMaTaQHaGi?pid=Api&P=0&h=180" class="card-img-top" alt="Mirchi Bada">
+                        <div class="card-body">
+                            <h5 class="card-title">Mirchi Bada</h5>
+                            <p class="card-text">Spicy chutney made from wild cucumbers, perfect with meals.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.AMT93m0toluD55oWebMCtAHaFj?pid=Api&P=0&h=180" class="card-img-top" alt="Mawa Kachori">
+                        <div class="card-body">
+                            <h5 class="card-title">Mawa Kachori</h5>
+                            <p class="card-text">Yogurt with bathua leaves, a winter specialty in Rajasthan.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse3.mm.bing.net/th/id/OIP.SK-dCNjHXuXYsCUUnz9a-gHaHa?pid=Api&P=0&h=180" class="card-img-top" alt="Mixed Dal">
+                        <div class="card-body">
+                            <h5 class="card-title">Bhujia</h5>
+                            <p class="card-text">a crispy snack prepared by using Vigna aconitifolia, gram flour and spices.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse1.mm.bing.net/th/id/OIP.frcYFo5Qwgc3VfBM7CMT0QAAAA?pid=Api&P=0&h=180" class="card-img-top" alt="Ghevar">
+                        <div class="card-body">
+                            <h5 class="card-title">Ghevar</h5>
+                            <p class="card-text">Traditional sweet made with wheat, ghee and jaggery.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://tse4.mm.bing.net/th/id/OIP.1QC86AkPQGF4xH1CQNK9EAHaEc?pid=Api&P=0&h=180" class="card-img-top" alt="Balushahi">
+                        <div class="card-body">
+                            <h5 class="card-title">Balushahi</h5>
+                            <p class="card-text">Sweet rice preparation, a festive specialty in Rajasthan.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hospitals" class="mb-5 fade-in">
+            <h2 class="section-title text-center">Major Hospitals</h2>
+            <p class="text-center mb-4">Medical facilities across Rajasthan for your safety</p>
+            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Hospital Name</th>
+                            <th>City</th>
+                            <th>Specialties</th>
+                            <th>Contact</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>SMS Hospital</td>
+                            <td>Jaipur</td>
+                            <td>Multi-specialty, Tertiary Care</td>
+                            <td>01262-211880</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="showDirection('SMS Hospital Jaipur')">
+                                    <i class="fas fa-map-marker-alt me-1"></i> Map
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Civil Hospital</td>
+                            <td>Udaipur</td>
+                            <td>General Medicine, Emergency</td>
+                            <td>01681-240001</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="showDirection('Civil Hospital Udaipur')">
+                                    <i class="fas fa-map-marker-alt me-1"></i> Map
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Medanta The Medicity</td>
+                            <td>Jodhpur</td>
+                            <td>Super-specialty, All Departments</td>
+                            <td>0124-4141414</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="showDirection('Medanta Hospital Jodhpur')">
+                                    <i class="fas fa-map-marker-alt me-1"></i> Map
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fortis Escorts</td>
+                            <td>Ajmer</td>
+                            <td>Cardiac, Neuro, Ortho</td>
+                            <td>0129-2281000</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="showDirection('Fortis Escorts Ajmer')">
+                                    <i class="fas fa-map-marker-alt me-1"></i> Map
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Alchemist Hospital</td>
+                            <td>Bikaner</td>
+                            <td>Multi-specialty</td>
+                            <td>0172-4677777</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="showDirection('Alchemist Hospital Bikaner')">
+                                    <i class="fas fa-map-marker-alt me-1"></i> Map
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Columbia Asia</td>
+                            <td>Jodhpur</td>
+                            <td>Multi-specialty</td>
+                            <td>0124-3989896</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary" onclick="showDirection('Columbia Asia Hospital Jodhpur')">
+                                    <i class="fas fa-map-marker-alt me-1"></i> Map
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="map-section" class="mb-5 fade-in">
+            <h2 class="section-title text-center">Interactive Map</h2>
+            <p class="text-center mb-4">Explore Rajasthan with our interactive map</p>
+            
+            <div class="card">
+                <div class="card-body p-0">
+                    <div id="map"></div>
+                </div>
+                <div class="card-footer bg-light">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                <input type="text" id="destinationInput" class="form-control" placeholder="Enter destination in Rajasthan">
+                                <button class="btn btn-primary" onclick="showDirection(document.getElementById('destinationInput').value + ', Rajasthan')">
+                                    Get Directions
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                            <button class="btn btn-outline-primary me-2" onclick="locateUser()">
+                                <i class="fas fa-location-arrow me-1"></i> My Location
+                            </button>
+                            <button class="btn btn-outline-secondary" onclick="resetMap()">
+                                <i class="fas fa-sync-alt me-1"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="planner" class="mb-5 fade-in">
+            <h2 class="section-title text-center">Trip Planner</h2>
+            <p class="text-center mb-4">Create your perfect itinerary for exploring Rajasthan</p>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Plan Your Visit</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="tripForm">
+                                <div class="mb-3">
+                                    <label for="citySelect" class="form-label">Select City/Cities</label>
+                                    <select class="form-select" id="citySelect" multiple>
+                                        <option value="jind">Udaipur</option>
+                                        <option value="chandigarh">Chandigarh</option>
+                                        <option value="gurugram">Jodhpur</option>
+                                        <option value="faridabad">Ajmer</option>
+                                        <option value="rohtak">Jaipur</option>
+                                        <option value="hisar">Sikar</option>
+                                        <option value="panipat">Chittorgarh</option>
+                                        <option value="karnal">Alwar</option>
+                                        <option value="kurukshetra">Kota</option>
+                                        <option value="panchkula">Bikaner</option>
+                                    </select>
+                                    <small class="text-muted">Hold Ctrl to select multiple cities</small>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="days" class="form-label">Number of Days</label>
+                                    <input type="range" class="form-range" id="days" min="1" max="15" value="3">
+                                    <div class="d-flex justify-content-between">
+                                        <small>1 Day</small>
+                                        <small>15 Days</small>
+                                    </div>
+                                    <div class="text-center mt-1">
+                                        <span id="daysValue" class="badge bg-primary">3 Days</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Interests</label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="historical" checked>
+                                                <label class="form-check-label" for="historical">
+                                                    <i class="fas fa-landmark me-1"></i> Historical
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="religious" checked>
+                                                <label class="form-check-label" for="religious">
+                                                    <i class="fas fa-praying-hands me-1"></i> Religious
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="foodTour">
+                                                <label class="form-check-label" for="foodTour">
+                                                    <i class="fas fa-utensils me-1"></i> Food
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="nature">
+                                                <label class="form-check-label" for="nature">
+                                                    <i class="fas fa-tree me-1"></i> Nature
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="budget" class="form-label">Budget Level</label>
+                                    <select class="form-select" id="budget">
+                                        <option value="low">Low Budget</option>
+                                        <option value="medium" selected>Medium Budget</option>
+                                        <option value="high">High Budget</option>
+                                    </select>
+                                </div>
+                                <button type="button" class="btn btn-primary w-100" onclick="generatePlan()">
+                                    <i class="fas fa-magic me-2"></i>Generate Plan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0"><i class="fas fa-map-marked-alt me-2"></i>Your Custom Trip Plan</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="planResult" class="text-center text-muted py-4">
+                                <i class="fas fa-calendar-plus fa-3x mb-3" style="color: #dee2e6;"></i>
+                                <h5>Your Personalized Trip Plan</h5>
+                                <p>Select your preferences and click "Generate Plan" to create your perfect itinerary</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5 class="text-white mb-4"><i class="fas fa-map-marked-alt me-2"></i>Epic Center</h5>
+                    <p>Your ultimate guide to exploring Rajasthan. Discover the rich culture, heritage, and flavors of this vibrant state.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white-50">Home</a></li>
+                        <li class="mb-2"><a href="#cities" class="text-white-50">Cities</a></li>
+                        <li class="mb-2"><a href="#places" class="text-white-50">Places</a></li>
+                        <li class="mb-2"><a href="#food" class="text-white-50">Food</a></li>
+                        <li class="mb-2"><a href="#planner" class="text-white-50">Planner</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-white mb-4">Contact Info</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Rajasthan Tourism Office, Chandigarh</li>
+                        <li class="mb-2"><i class="fas fa-phone me-2"></i> +91 9876543210</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@epiccenterrajasthan.com</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p class="text-white-50">Subscribe to get updates on new places and events</p>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Your Email">
+                        <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0 small">&copy; 2023 Epic Center. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="mb-0 small">Designed with <i class="fas fa-heart text-danger"></i> for Rajasthan Tourism</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=places" async defer></script>
+    <script>
+        // Initialize variables
+        let map;
+        let directionsService;
+        let directionsRenderer;
+        let userLocation = null;
+        
+        // Initialize map when API is loaded
+        function initMap() {
+            // Default to Rajasthan coordinates
+            const rajasthan = { lat: 26.9, lng: 75.8 };
+            
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: rajasthan,
+                zoom: 8,
+                styles: [
+                    {
+                        "featureType": "poi",
+                        "stylers": [
+                            { "visibility": "off" }
+                        ]
+                    }
+                ]
+            });
+            
+            directionsService = new google.maps.DirectionsService();
+            directionsRenderer = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers: false,
+                polylineOptions: {
+                    strokeColor: "#4e73df",
+                    strokeOpacity: 0.8,
+                    strokeWeight: 4
+                }
+            });
+            
+            // Add marker for Rajasthan center
+            new google.maps.Marker({
+                position: rajasthan,
+                map: map,
+                title: "Rajasthan"
+            });
+            
+            // Update days value display
+            document.getElementById('days').addEventListener('input', function() {
+                document.getElementById('daysValue').textContent = this.value + (this.value == 1 ? ' Day' : ' Days');
+            });
+        }
+        
+        // Show city information
+        function showCityInfo(city) {
+            alert(`Showing information for ${city}. This would display detailed city info in a real implementation.`);
+            // In a full implementation, this would show a modal with city details
+        }
+        
+        // Show all cities
+        function showAllCities() {
+            const allCities = [
+                "Ajmer", "Alwar", "Banswara", "Baran", "Barmer", "Bharatpur", "Bhilwara", "Bikaner", "Bundi", "Chittorgarh", "Churu", "Dausa", "Dholpur", "Dungarpur", "Gangapur City", "Hanumangarh", "Jaipur", "Jaisalmer", "Jalore", "Jhalawar", "Jhunjhunu", "Jodhpur", "Karauli", "Kota", "Nagaur", "Pali", "Pratapgarh", "Rajsamand", "Sawai Madhopur", "Sikar", "Sirohi", "Sri Ganganagar", "Tonk", "Udaipur", "Balotra", "Beawar", "Didwana-Kuchaman", "Khairthal-Tijara", "Kotputli-Behror", "Neem Ka Thana", "Phalodi", "Salumbar", "Deeg"
+            ];
+            
+            let citiesHTML = '<div class="row">';
+            allCities.forEach(city => {
+                citiesHTML += `
+                    <div class="col-md-3 col-6 mb-2">
+                        <div class="p-2 border rounded text-center">
+                            <i class="fas fa-city me-2"></i>${city}
+                        </div>
+                    </div>
+                `;
+            });
+            citiesHTML += '</div>';
+            
+            document.getElementById('planResult').innerHTML = `
+                <h4 class="text-center mb-4">All 22 Districts of Rajasthan</h4>
+                ${citiesHTML}
+                <div class="mt-3">
+                    <button class="btn btn-primary" onclick="generatePlan()">
+                        <i class="fas fa-arrow-left me-2"></i>Back to Planner
+                    </button>
+                </div>
+            `;
+            
+            document.getElementById('planner').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Request user location
+        function requestLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        alert("Location accessed successfully! You can now get directions from your current location.");
+                    },
+                    function(error) {
+                        alert("Error getting location: " + error.message);
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+        
+        // Locate user on map
+        function locateUser() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        userLocation = pos;
+                        
+                        // Center map on user location
+                        map.setCenter(pos);
+                        map.setZoom(14);
+                        
+                        // Add marker for user location
+                        new google.maps.Marker({
+                            position: pos,
+                            map: map,
+                            title: "Your Location",
+                            icon: {
+                                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+                            }
+                        });
+                    },
+                    function() {
+                        alert("Error: The Geolocation service failed or your browser doesn't support geolocation.");
+                    }
+                );
+            } else {
+                alert("Error: Your browser doesn't support geolocation.");
+            }
+        }
+        
+        // Show directions from user location to destination
+        function showDirection(destination) {
+            if (!userLocation) {
+                alert("Please allow location access first by clicking 'Show My Location' or 'My Location' button.");
+                return;
+            }
+            
+            const request = {
+                origin: userLocation,
+                destination: destination,
+                travelMode: 'DRIVING'
+            };
+            
+            directionsService.route(request, function(result, status) {
+                if (status == 'OK') {
+                    directionsRenderer.setDirections(result);
+                    
+                    // Calculate distance and time
+                    const route = result.routes[0];
+                    let distance = 0;
+                    let duration = 0;
+                    
+                    for (let i = 0; i < route.legs.length; i++) {
+                        distance += route.legs[i].distance.value;
+                        duration += route.legs[i].duration.value;
+                    }
+                    
+                    distance = distance / 1000; // convert to km
+                    duration = Math.ceil(duration / 60); // convert to minutes
+                    
+                    // Show info window
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<div class="p-2">
+                            <h6>Directions to ${destination}</h6>
+                            <p>Distance: ${distance.toFixed(1)} km<br>
+                            Estimated Time: ${duration} mins</p>
+                            <small>Click on the map to view step-by-step directions</small>
+                        </div>`,
+                        position: userLocation
+                    });
+                    
+                    infoWindow.open(map);
+                } else {
+                    alert('Directions request failed due to ' + status);
+                }
+            });
+        }
+        
+        // Reset map to default view
+        function resetMap() {
+            directionsRenderer.setDirections({routes: []});
+            map.setCenter({ lat: 26.9, lng: 75.8 });
+            map.setZoom(8);
+        }
+        
+        // Generate trip plan based on user inputs
+        function generatePlan() {
+            const selectedCities = Array.from(document.getElementById('citySelect').selectedOptions).map(option => option.value);
+            const days = parseInt(document.getElementById('days').value);
+            const budget = document.getElementById('budget').value;
+            const historical = document.getElementById('historical').checked;
+            const religious = document.getElementById('religious').checked;
+            const foodTour = document.getElementById('foodTour').checked;
+            const nature = document.getElementById('nature').checked;
+            
+            if (selectedCities.length === 0) {
+                alert("Please select at least one city to plan your trip");
+                return;
+            }
+            
+            let planHTML = '<h4 class="text-center mb-4">Your Rajasthan Trip Plan</h4>';
+            planHTML += `<p class="text-center mb-3">Visiting: ${selectedCities.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')}</p>`;
+            planHTML += '<div class="d-flex justify-content-center mb-4"><div class="badge bg-primary me-2"><i class="fas fa-clock me-1"></i> ' + days + ' Day' + (days > 1 ? 's' : '') + '</div>';
+            planHTML += '<div class="badge bg-success me-2"><i class="fas fa-wallet me-1"></i> ' + budget.charAt(0).toUpperCase() + budget.slice(1) + ' Budget</div></div>';
+            
+            // Generate day-by-day itinerary
+            const daysPerCity = Math.ceil(days / selectedCities.length);
+            let dayCounter = 1;
+            
+            for (const city of selectedCities) {
+                const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+                planHTML += `<h5 class="mt-4 mb-3"><i class="fas fa-city me-2"></i>${cityName}</h5>`;
+                
+                for (let i = 0; i < daysPerCity && dayCounter <= days; i++, dayCounter++) {
+                    planHTML += `<div class="day-plan"><h5><i class="fas fa-calendar-day me-2"></i>Day ${dayCounter}: ${cityName}</h5><ul class="list-unstyled">`;
+                    
+                    // Morning activities
+                    planHTML += '<li class="mb-2"><i class="fas fa-sun me-2 text-warning"></i> <strong>Morning:</strong> ';
+                    if (historical) {
+                        planHTML += `Visit ${cityName}'s historical sites`;
+                        if (religious) planHTML += ' and temples';
+                    } else if (religious) {
+                        planHTML += `Visit ${cityName}'s famous temples`;
+                    } else {
+                        planHTML += `Explore ${cityName}`;
+                    }
+                    planHTML += '</li>';
+                    
+                    // Afternoon activities
+                    planHTML += '<li class="mb-2"><i class="fas fa-cloud-sun me-2 text-info"></i> <strong>Afternoon:</strong> ';
+                    if (foodTour) {
+                        planHTML += `Lunch at ${cityName}'s local restaurants`;
+                        if (nature) planHTML += ' then visit parks/nature spots';
+                    } else if (nature) {
+                        planHTML += `Visit ${cityName}'s parks and nature spots`;
+                    } else {
+                        planHTML += `Continue exploring ${cityName}`;
+                    }
+                    planHTML += '</li>';
+                    
+                    // Evening activities
+                    planHTML += '<li class="mb-2"><i class="fas fa-moon me-2 text-secondary"></i> <strong>Evening:</strong> ';
+                    if (foodTour) {
+                        planHTML += `Dinner at ${cityName}'s specialty restaurants`;
+                    } else {
+                        planHTML += `Relax at ${cityName}'s local attractions`;
+                    }
+                    planHTML += '</li>';
+                    
+                    planHTML += '</ul></div>';
+                }
+            }
+            
+            // Add budget tips
+            planHTML += '<div class="mt-4 p-3 bg-light rounded"><h5><i class="fas fa-lightbulb me-2 text-warning"></i>Budget Tips:</h5>';
+            if (budget === 'low') {
+                planHTML += '<ul class="mb-0">';
+                planHTML += '<li>Use public transportation (buses are economical)</li>';
+                planHTML += '<li>Stay in budget hotels or guest houses (₹500-₹1000 per night)</li>';
+                planHTML += '<li>Eat at local dhabas for authentic and affordable meals</li>';
+                planHTML += '<li>Visit free attractions like temples and public parks</li>';
+                planHTML += '</ul>';
+            } else if (budget === 'medium') {
+                planHTML += '<ul class="mb-0">';
+                planHTML += '<li>Mix of public and private transport (rent a car for some days)</li>';
+                planHTML += '<li>Stay in 3-star hotels (₹1500-₹3000 per night)</li>';
+                planHTML += '<li>Mix of street food and restaurants for dining</li>';
+                planHTML += '<li>Consider guided tours for important sites</li>';
+                planHTML += '</ul>';
+            } else {
+                planHTML += '<ul class="mb-0">';
+                planHTML += '<li>Private car with driver for entire trip</li>';
+                planHTML += '<li>Stay in luxury hotels (₹4000+ per night)</li>';
+                planHTML += '<li>Fine dining experiences at best restaurants</li>';
+                planHTML += '<li>Private guided tours and exclusive experiences</li>';
+                planHTML += '</ul>';
+            }
+            planHTML += '</div>';
+            
+            // Add map button if user has shared location
+            if (userLocation) {
+                planHTML += '<div class="text-center mt-3">';
+                selectedCities.forEach(city => {
+                    const cityName = city.charAt(0).toUpperCase() + city.slice(1);
+                    planHTML += `
+                        <button class="btn btn-primary me-2 mb-2" onclick="showDirection('${cityName}, Rajasthan')">
+                            <i class="fas fa-map-marked-alt me-2"></i>${cityName}
+                        </button>
+                    `;
+                });
+                planHTML += '</div>';
+            }
+            
+            document.getElementById('planResult').innerHTML = planHTML;
+        }
+        
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Show/hide floating button based on scroll position
+        window.onscroll = function() {
+            const floatingBtn = document.querySelector('.floating-btn');
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                floatingBtn.style.display = 'flex';
+            } else {
+                floatingBtn.style.display = 'none';
+            }
+        };
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize tooltips
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function(tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+</html>
